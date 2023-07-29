@@ -1,0 +1,23 @@
+spring:
+ cloud:
+  gateway:
+    routes:
+     - id: quiz-service
+       uri: lb://QUIZ-SERVICE
+       predicates: 
+        - Path=/quiz/**
+       filters:
+        - AuthenticationFilter
+     
+     - id: question-service
+       uri: lb://QUESTION-SERVICE
+       predicates: 
+        - Path=/question/**
+       filters:
+        - AuthenticationFilter
+        
+     - id: auth-service
+       uri: lb://AUTH-SERVICE
+       predicates: 
+        - Path=/auth/**
+  
